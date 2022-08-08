@@ -35,7 +35,7 @@ public class UsersDTO {
                 + ", lastName=" + lastName + "]";
     }
 
-    // generate hashcode {} 
+    
 
     @Override
     public int hashCode() {

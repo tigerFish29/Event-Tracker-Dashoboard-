@@ -6,9 +6,13 @@ import java.time.OffsetDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+
+import javax.persistence.ManyToOne;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -37,6 +41,10 @@ public class Events {
 
      @Column(nullable = false)
      private String description;
+
+     @ManyToOne(fetch = FetchType.LAZY)
+     @JoinColumn(name = "events_id", nullable = false)
+     private CollectionEvents events;
 
      @CreatedDate
      @Column(nullable = false, updatable = false)

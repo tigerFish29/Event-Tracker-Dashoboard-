@@ -57,13 +57,25 @@ public class UsersService {
     public void delete(final Long id) {
         usersRepository.deleteById(id);
     }
+
+    private UsersDTO mapToDTO(final Users users, final UsersDTO usersDTO) {
+           usersDTO.setId(users.getId());
+           usersDTO.setFirstName(users.getFirstName());
+           usersDTO.setLastName(users.getLastName());
+           usersDTO.setEmail(users.getEmail());
+           usersDTO.setAddress(users.getAddress());
+           return usersDTO;
+    }
     
 
-    private void mapToEntity(UsersDTO usersDTO, Users users) {
+    private Users mapToEntity(final UsersDTO usersDTO, final Users users) {
+        users.setFirstName(usersDTO.getFirstName());
+        users.setLastName(usersDTO.getLastName());
+        users.setEmail(usersDTO.getEmail());
+        users.setAddress(usersDTO.getAddress());
+        return users;
     }
 
-    private UsersDTO mapToDTO(Users users, UsersDTO usersDTO) {
-        return null;
-    }
+   
     
 }

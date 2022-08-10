@@ -64,4 +64,9 @@ public class EventsService {
         return eventsRepository.save(fromDB);
     }
 
+    // delete 
+    public void delete(final Long id) {
+        eventsRepository.deleteById(id);
+    }
+
 }

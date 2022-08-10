@@ -5,8 +5,9 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
-import org.webjars.NotFoundException;
+
 
 import com.eventtracker.events.domain.CollectionEvents;
 import com.eventtracker.events.model.CollectionEventsDTO;
@@ -45,5 +46,26 @@ public class CollectionEventsService {
     }
 
     // get one {} 
+    public CollectionEvents get(long id) {
+        try {
+            return collectionEventsRepository.findById(id).orElseThrow(NotFoundException::new);
+        } catch (NotFoundException e) {
+           
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // create 
+    public CollectionEvents create(CollectionEvents collectionEvents) {
+        return collectionEventsRepository.save(collectionEvents);
+    }
+
+    // update 
     
+
+    // delete 
+    public void delete(final Long id) {
+        collectionEventsRepository.deleteById(id);
+    }
 }

@@ -7,19 +7,16 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
-
-
 import com.eventtracker.events.domain.CollectionEvents;
-
 import com.eventtracker.events.model.CollectionEventsDTO;
 import com.eventtracker.events.repos.CollectionEventsRepository;
-import com.eventtracker.events.repos.UserRepository;
+
 
 @Service
 public class CollectionEventsService {
 
     private CollectionEventsRepository collectionEventsRepository;
-    private UserRepository usersRepository;
+  
 
     private ModelMapper mapper;
 
@@ -30,10 +27,9 @@ public class CollectionEventsService {
 
     // constructor {}
     @Autowired
-    public CollectionEventsService(CollectionEventsRepository collectionEventsRepository, UserRepository usersRepository, ModelMapper mapper) {
+    public CollectionEventsService(CollectionEventsRepository collectionEventsRepository, ModelMapper mapper) {
         super();
         this.collectionEventsRepository = collectionEventsRepository;
-        this.usersRepository = usersRepository;
         this.mapper = mapper;
     }
     
@@ -75,7 +71,6 @@ public class CollectionEventsService {
         current.setPostcode(collectionEvents.getPostcode());
         current.setCountry(collectionEvents.getCountry());
         current.setContinent(collectionEvents.getContinent());
-        // connect the user 
         
         return this.collectionEventsRepository.save(current);
     

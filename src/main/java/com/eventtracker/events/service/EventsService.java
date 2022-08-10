@@ -1,6 +1,7 @@
 package com.eventtracker.events.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -37,7 +38,8 @@ public class EventsService {
     }
     // find all()
     public List<EventsDTO> findAll() {
-        return eventsRepository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
+        List<Events> events = eventsRepository.findAll();
+        return events.stream().map(this::mapToDTO).collect(Collectors.toList());
     }
     // get one {} 
     public Events get(long id) {
@@ -64,9 +66,13 @@ public class EventsService {
         return eventsRepository.save(fromDB);
     }
 
-    // delete 
-    public void delete(final Long id) {
-        eventsRepository.deleteById(id);
+    public void delete(final Long id) throws NotFoundException  {
+        Optional<Events> events = this.eventsRepository.findById(id);
+        if (events.isPresent()) {
+            this.eventsRepository.deleteById(id);
+        } else {
+            throw new NotFoundException();
+        }
     }
 
 }

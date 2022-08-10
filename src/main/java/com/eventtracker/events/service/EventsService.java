@@ -35,11 +35,33 @@ public class EventsService {
     public Events addEvent(Events events) {
         return this.eventsRepository.save(events);
     }
-
+    // find all()
     public List<EventsDTO> findAll() {
         return eventsRepository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
-
+    // get one {} 
+    public Events get(long id) {
+        try {
+            return eventsRepository.findById(id).orElseThrow(NotFoundException::new);
+        } catch (NotFoundException e) {
+           
+            e.printStackTrace();
+        }
+        return null;
+    }
     
+    // create{} 
+    public Events create(Events events) {
+        return eventsRepository.save(events);
+    }
+
+    // update 
+    public Events update(final Long id, final Events events) {
+        Events fromDB = get(id);
+        fromDB.setDate(events.getDate());
+        fromDB.setTitle(events.getTitle());
+        fromDB.setDescription(events.getDescription());
+        return eventsRepository.save(fromDB);
+    }
 
 }

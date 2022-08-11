@@ -67,12 +67,10 @@ public class UsersController {
 
     @RequestMapping(path="/delete/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable final Long id, final RedirectAttributes redirectAttributes) {
-        this.usersService.delete(id);
-        redirectAttributes.addFlashAttribute("message", "User has now been deleted!");
+        usersService.delete(id);
+        String message = "User has now been deleted! ";
+        redirectAttributes.addFlashAttribute("message", message);
         return null;
     }
-
-    
-    
 
 }

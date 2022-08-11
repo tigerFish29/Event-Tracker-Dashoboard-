@@ -58,7 +58,7 @@ public class EventsController {
       public RedirectView updateUser(RedirectAttributes redirects, @PathVariable("id") Long id, @ModelAttribute Events events) {
         eventsService.update(id, events);
         RedirectView redirectView = new RedirectView("/", true);
-        String message = "Event has now been updated!";
+        String message = "<b>Event has now been updated!</b>";
         redirects.addFlashAttribute("eventUpdate", message);
         return redirectView;
       }
@@ -66,7 +66,7 @@ public class EventsController {
       @PostMapping("/delete/{id}")
       public String delete(@PathVariable final Long id, final RedirectAttributes redirectAttributes) throws NotFoundException{
         eventsService.delete(id);
-        String message = "Deleted!";
+        String message = "<b>Deleted!</b>";
         redirectAttributes.addFlashAttribute("message", message);
         return "hello";
       }    

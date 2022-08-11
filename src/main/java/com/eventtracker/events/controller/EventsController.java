@@ -2,9 +2,12 @@ package com.eventtracker.events.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.eventtracker.events.domain.Events;
 import com.eventtracker.events.service.EventsService;
@@ -29,12 +32,24 @@ public class EventsController {
         return null; // dont have template yet 
      }
 
-
+     // get a single event 
      @RequestMapping(path = "/events/{id}", method = RequestMethod.GET)
      public String getEvent(Model model, @PathVariable("id") Long id) {
         Events events = eventsService.get(id);
         model.addAttribute("events", events);
         return null; // we dont have a template 
      }
+
+     // create an event 
+     @RequestMapping(path = "/create", method = RequestMethod.POST) 
+        public RedirectView createEvent(RedirectAttributes redirects, @ModelAttribute Events events) {
+            eventsService.create(events);
+            String message = "Event has been created !";
+            redirects.addFlashAttribute("events", message);
+            return null; // need template 
+        }
+     }
+
+
 
 }

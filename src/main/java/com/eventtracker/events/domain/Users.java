@@ -1,6 +1,6 @@
 package com.eventtracker.events.domain;
 
-import java.time.OffsetDateTime;
+
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -10,9 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Getter;
@@ -33,6 +30,7 @@ public class Users {
     @Column(nullable = false)
     private String firstName;
 
+
     @Column(nullable = false)
     private String lastName; 
 
@@ -45,36 +43,34 @@ public class Users {
     @OneToMany(mappedBy = "user")
     private Set<CollectionEvents> userCollectionEventss;
 
-    @CreatedDate
-    @Column(nullable = false, updatable = false)
-    private OffsetDateTime dateCreated;
-
-    @LastModifiedDate
-    @Column(nullable = false)
-    private OffsetDateTime lastUpdated;
+    
     
 
     // generate a to string []
+    
     @Override
     public String toString() {
-        return "Users [address=" + address + ", dateCreated=" + dateCreated + ", email=" + email + ", firstName="
-                + firstName + ", id=" + id + ", lastName=" + lastName + ", lastUpdated=" + lastUpdated + "]";
+        return "Users [address=" + address + ", email=" + email + ", firstName=" + firstName + ", id=" + id
+                + ", lastName=" + lastName + ", userCollectionEventss=" + userCollectionEventss + "]";
     }
 
-    // generate a hashcode [] 
+
+
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((address == null) ? 0 : address.hashCode());
-        result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
         result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-        result = prime * result + ((lastUpdated == null) ? 0 : lastUpdated.hashCode());
+        result = prime * result + ((userCollectionEventss == null) ? 0 : userCollectionEventss.hashCode());
         return result;
     }
+
+
 
 
     @Override
@@ -90,11 +86,6 @@ public class Users {
             if (other.address != null)
                 return false;
         } else if (!address.equals(other.address))
-            return false;
-        if (dateCreated == null) {
-            if (other.dateCreated != null)
-                return false;
-        } else if (!dateCreated.equals(other.dateCreated))
             return false;
         if (email == null) {
             if (other.email != null)
@@ -116,12 +107,16 @@ public class Users {
                 return false;
         } else if (!lastName.equals(other.lastName))
             return false;
-        if (lastUpdated == null) {
-            if (other.lastUpdated != null)
+        if (userCollectionEventss == null) {
+            if (other.userCollectionEventss != null)
                 return false;
-        } else if (!lastUpdated.equals(other.lastUpdated))
+        } else if (!userCollectionEventss.equals(other.userCollectionEventss))
             return false;
         return true;
     }
+    // generate a hashcode [] 
+
+
+   
 
 }

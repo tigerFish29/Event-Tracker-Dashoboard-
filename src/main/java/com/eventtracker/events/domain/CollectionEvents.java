@@ -1,6 +1,6 @@
 package com.eventtracker.events.domain;
 
-import java.time.OffsetDateTime;
+
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -14,8 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Getter;
@@ -62,25 +61,16 @@ public class CollectionEvents {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private Users user;
-
-    @CreatedDate
-    @Column(nullable = false, updatable = false)
-    private OffsetDateTime dateCreated; 
-
-    @LastModifiedDate
-    @Column(nullable = false)
-    private OffsetDateTime lastUpdated;
     
-    // to string {} 
+
+    // to string {}
     @Override
     public String toString() {
         return "CollectionEvents [address=" + address + ", city=" + city + ", continent=" + continent + ", country="
-                + country + ", dateCreated=" + dateCreated + ", id=" + id + ", lastUpdated=" + lastUpdated + ", name="
-                + name + ", postcode=" + postcode + ", region=" + region + "]";
+                + country + ", eventsEventss=" + eventsEventss + ", id=" + id + ", name=" + name + ", postcode="
+                + postcode + ", region=" + region + ", user=" + user + "]";
     }
-
-    // generate hashcode {} 
-
+    // hashcode {} 
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -89,12 +79,12 @@ public class CollectionEvents {
         result = prime * result + ((city == null) ? 0 : city.hashCode());
         result = prime * result + ((continent == null) ? 0 : continent.hashCode());
         result = prime * result + ((country == null) ? 0 : country.hashCode());
-        result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
+        result = prime * result + ((eventsEventss == null) ? 0 : eventsEventss.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((lastUpdated == null) ? 0 : lastUpdated.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((postcode == null) ? 0 : postcode.hashCode());
         result = prime * result + ((region == null) ? 0 : region.hashCode());
+        result = prime * result + ((user == null) ? 0 : user.hashCode());
         return result;
     }
 
@@ -127,20 +117,15 @@ public class CollectionEvents {
                 return false;
         } else if (!country.equals(other.country))
             return false;
-        if (dateCreated == null) {
-            if (other.dateCreated != null)
+        if (eventsEventss == null) {
+            if (other.eventsEventss != null)
                 return false;
-        } else if (!dateCreated.equals(other.dateCreated))
+        } else if (!eventsEventss.equals(other.eventsEventss))
             return false;
         if (id == null) {
             if (other.id != null)
                 return false;
         } else if (!id.equals(other.id))
-            return false;
-        if (lastUpdated == null) {
-            if (other.lastUpdated != null)
-                return false;
-        } else if (!lastUpdated.equals(other.lastUpdated))
             return false;
         if (name == null) {
             if (other.name != null)
@@ -157,12 +142,16 @@ public class CollectionEvents {
                 return false;
         } else if (!region.equals(other.region))
             return false;
+        if (user == null) {
+            if (other.user != null)
+                return false;
+        } else if (!user.equals(other.user))
+            return false;
         return true;
     }
 
-
     
-
+    
     
     
 }

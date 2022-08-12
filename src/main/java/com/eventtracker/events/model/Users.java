@@ -1,77 +1,61 @@
-package com.eventtracker.events.domain;
-
-
-import java.util.Set;
+package com.eventtracker.events.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Users {
-    
-    @Id
-    @Column(nullable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
 
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Column(nullable = false)
+    private Long id; 
 
     @Column(nullable = false)
     private String firstName;
-
 
     @Column(nullable = false)
     private String lastName; 
 
     @Column(nullable = false)
-    private String email;
+    private Integer age;
 
-    @Column
-    private String address;
-
-    @OneToMany(mappedBy = "user")
-    private Set<CollectionEvents> userCollectionEventss;
-
+    @Column(nullable = false)
+    private String description;
     
-    
-
-    // generate a to string []
-    
+    // to string {} 
     @Override
     public String toString() {
-        return "Users [address=" + address + ", email=" + email + ", firstName=" + firstName + ", id=" + id
-                + ", lastName=" + lastName + ", userCollectionEventss=" + userCollectionEventss + "]";
+        return "Users [age=" + age + ", description=" + description + ", firstName=" + firstName + ", id=" + id
+                + ", lastName=" + lastName + "]";
     }
 
-
-
+    // hashcode {} 
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((address == null) ? 0 : address.hashCode());
-        result = prime * result + ((email == null) ? 0 : email.hashCode());
+        result = prime * result + ((age == null) ? 0 : age.hashCode());
+        result = prime * result + ((description == null) ? 0 : description.hashCode());
         result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-        result = prime * result + ((userCollectionEventss == null) ? 0 : userCollectionEventss.hashCode());
         return result;
     }
-
-
-
 
     @Override
     public boolean equals(Object obj) {
@@ -82,15 +66,15 @@ public class Users {
         if (getClass() != obj.getClass())
             return false;
         Users other = (Users) obj;
-        if (address == null) {
-            if (other.address != null)
+        if (age == null) {
+            if (other.age != null)
                 return false;
-        } else if (!address.equals(other.address))
+        } else if (!age.equals(other.age))
             return false;
-        if (email == null) {
-            if (other.email != null)
+        if (description == null) {
+            if (other.description != null)
                 return false;
-        } else if (!email.equals(other.email))
+        } else if (!description.equals(other.description))
             return false;
         if (firstName == null) {
             if (other.firstName != null)
@@ -107,16 +91,12 @@ public class Users {
                 return false;
         } else if (!lastName.equals(other.lastName))
             return false;
-        if (userCollectionEventss == null) {
-            if (other.userCollectionEventss != null)
-                return false;
-        } else if (!userCollectionEventss.equals(other.userCollectionEventss))
-            return false;
         return true;
     }
-    // generate a hashcode [] 
 
 
-   
+    
 
+    
+    
 }

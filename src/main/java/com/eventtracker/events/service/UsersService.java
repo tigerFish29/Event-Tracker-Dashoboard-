@@ -1,80 +1,67 @@
 package com.eventtracker.events.service;
-
 import java.util.List;
-import java.util.stream.Collectors;
-
-
-import org.springframework.http.HttpStatus;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.eventtracker.events.domain.Users;
-import com.eventtracker.events.model.UsersDTO;
 import com.eventtracker.events.repos.UserRepository;
 
 @Service
 public class UsersService {
 
-    private final UserRepository usersRepository;
+    private  UserRepository usersRepository;
 
     // constructor 
-    public UsersService(final UserRepository usersRepository) {
-        this.usersRepository = usersRepository;
+    @Autowired
+    private Users addUser(Users users) {
+        return this.usersRepository.save(users);
     }
 
-    public List<UsersDTO> findAll() {
-        return usersRepository.findAll().stream()
-        .map(users -> mapToDTO(users, new UsersDTO())).collect(Collectors.toList());
-
+    // find all 
+    public List<Users> findAll() {
+        return usersRepository.findAll();
     }
 
-    // get 
-
-    public UsersDTO get(final Long id) {
-        return usersRepository.findById(id)
-                .map(users -> mapToDTO(users, new UsersDTO()))
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    // get one {} 
+    public Users get(Long id) {
+        try {
+            return usersRepository.findById(id).orElseThrow(NotFoundException::new);
+        } catch (NotFoundException e) {
+           
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    // create 
-
-    public Long create(final UsersDTO usersDTO) {
-        final Users users = new Users();
-        mapToEntity(usersDTO, users);
-        return usersRepository.save(users).getId();
-
+    // create users 
+    public Users create(Users users) {
+        return usersRepository.save(users);
     }
 
-    // update 
-    public void update(final Long id, final UsersDTO usersDTO) {
-        final Users users = usersRepository.findById(id)
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        mapToEntity(usersDTO, users);
-        usersRepository.save(users);
+    // update the user {} 
+    public Users update(final Long id, final Users users) {
+        Users fromDB = get(id);
+        fromDB.setFirstName(users.getFirstName());
+        fromDB.setLastName(users.getLastName());
+        fromDB.setEmail(users.getEmail());
+        fromDB.setAddress(users.getAddress());
+        return usersRepository.save(fromDB);
     }
 
-    // delete method 
-    public void delete(final Long id) {
-        usersRepository.deleteById(id);
-    }
 
-    private UsersDTO mapToDTO(final Users users, final UsersDTO usersDTO) {
-           usersDTO.setId(users.getId());
-           usersDTO.setFirstName(users.getFirstName());
-           usersDTO.setLastName(users.getLastName());
-           usersDTO.setEmail(users.getEmail());
-           usersDTO.setAddress(users.getAddress());
-           return usersDTO;
+    // delete the user {} 
+    public void delete(final Long id) throws NotFoundException {
+        Optional<Users> users = this.usersRepository.findById(id);
+        if (users.isPresent()) {
+            this.usersRepository.deleteById(id);
+        } else {
+            throw new NotFoundException();
+        }
+        
     }
     
-
-    private Users mapToEntity(final UsersDTO usersDTO, final Users users) {
-        users.setFirstName(usersDTO.getFirstName());
-        users.setLastName(usersDTO.getLastName());
-        users.setEmail(usersDTO.getEmail());
-        users.setAddress(usersDTO.getAddress());
-        return users;
-    }
 
    
     

@@ -1,14 +1,12 @@
 package com.eventtracker.events.service;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 import com.eventtracker.events.domain.CollectionEvents;
-import com.eventtracker.events.model.CollectionEventsDTO;
+
 import com.eventtracker.events.repos.CollectionEventsRepository;
 
 
@@ -17,20 +15,12 @@ public class CollectionEventsService {
 
     private CollectionEventsRepository collectionEventsRepository;
   
-
-    private ModelMapper mapper;
-
-    // mapping 
-    private CollectionEventsDTO mapToDTO(CollectionEvents collections) {
-        return mapper.map(collections, CollectionEventsDTO.class);
-    }
-
     // constructor {}
     @Autowired
     public CollectionEventsService(CollectionEventsRepository collectionEventsRepository, ModelMapper mapper) {
         super();
         this.collectionEventsRepository = collectionEventsRepository;
-        this.mapper = mapper;
+        
     }
     
     public CollectionEvents addEvent(CollectionEvents collectionEvents) {
@@ -38,9 +28,9 @@ public class CollectionEventsService {
     }
     
     // find all 
-   public List<CollectionEventsDTO> findAll() {
-        List<CollectionEvents> events = collectionEventsRepository.findAll();
-        return events.stream().map(this::mapToDTO).collect(Collectors.toList());
+   public List<CollectionEvents> findAll() {
+       return collectionEventsRepository.findAll();
+        
     }
 
      

@@ -16,6 +16,7 @@ import com.eventtracker.events.Repository.TrainerRepo;
 import com.eventtracker.events.Service.TrainerService;
 import com.eventtracker.events.model.Trainer;
 
+
 @Controller
 public class TrainerController {
 

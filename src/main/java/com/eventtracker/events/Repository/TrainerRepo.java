@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.eventtracker.events.model.Trainer;
 
+
 @Repository
 public interface TrainerRepo extends JpaRepository<Trainer, Integer> {
     Optional<Trainer> findByIdAndActive(Integer id, boolean active);

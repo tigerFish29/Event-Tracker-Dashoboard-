@@ -1,5 +1,6 @@
 package com.eventtracker.events.Service;
 
+
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
@@ -9,7 +10,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.eventtracker.events.Repository.TrainerRepo;
 import com.eventtracker.events.model.Trainer;
-
 
 @Service
 public class TrainerService {
@@ -68,3 +68,4 @@ public class TrainerService {
     
     
 }
+

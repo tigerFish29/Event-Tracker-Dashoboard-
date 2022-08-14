@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+            name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Playing with Spring Boot</title>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
+<body class="container">
+<form class="col card p-3 my-5" method="post" th:action="@{/create}" th:object="${trainer}">
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input class="form-control" id="firstName" placeholder="Enter First Name" required autocomplete="off"
+               th:field="*{firstName}"
+               type="text"/>
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input class="form-control" id="lastName" placeholder="Enter Last Name" required  autocomplete="off"
+               th:field="*{lastName}"
+               type="text"/>
+    </div>
+
+    <div class="form-group">
+        <label for="lastName">Description</label>
+        <textarea class="form-control" id="description"  rows="7" autocomplete="off"
+               th:field="*{description}"
+               type="text"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="role">Experience</label>
+        <select class="form-control " id="experience" required th:field="*{experience}">
+            <option hidden value="">Select a role</option>
+            <option
+                    th:each="experience : ${T(com.spring.springuser.model.ExperienceLevel).values()}"
+                    th:text="${experience}"
+                    th:value="${experience}">
+            </option>
+        </select>
+    </div>
+    <div>
+        <input class="btn btn-primary" type="submit" value="Create Trainer">
+        <input class="btn btn-dark" type="reset" value="Reset">
+    </div>
+</form>
+
+
+<div th:if="${userMessage}" th:utext="${userMessage}" class="alert alert-success text-center"></div>
+<table class="table table-striped table-bordered ">
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>ExperienceLevel</th>
+        <th>Created At</th>
+        <th>Updated At</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:if="${#lists.isEmpty(trainers)}">
+        <td class="text-center" colspan="7">No Records found. Add some...!</td>
+    </tr>
+    <tr th:each="trainer : ${trainers}">
+        <td class="align-middle" th:text="${trainer.id}"></td>
+        <td class="align-middle" th:text="${trainer.firstName}"></td>
+        <td class="align-middle" th:text="${trainer.lastName}"></td>
+        <td class="align-middle" th:text="${trainer.experience}"></td>
+        <td class="align-middle" th:text="${trainer.createdAt}"></td>
+        <td class="align-middle" th:text="${trainer.updatedAt}"></td>
+        <td class="align-middle text-center"><a class="btn btn-secondary" th:href=@{/edit/{id}(id=${trainer.id})}>✏</a></td>
+        <td class="align-middle text-center"><a class="btn btn-danger"th:href="@{/delete/{id}(id=${trainer.id})}">Delete</a></td>
+    </tr>
+</table>
+</body>
+</html>

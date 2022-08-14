@@ -1,61 +1,66 @@
 package com.eventtracker.events.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "Users")
-public class Users {
+public class Trainer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(nullable = false)
-    private Long id; 
+    private Integer id; 
 
     @Column(nullable = false)
     private String firstName;
 
     @Column(nullable = false)
-    private String lastName; 
-
-    @Column(nullable = false)
-    private Integer age;
+    private String lastName;
+    
 
     @Column(nullable = false)
     private String description;
-    
+
+    private String experience ;
+  
+    private boolean active= true;
+
+   
+
+    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime updatedAt = LocalDateTime.now();
+
     // to string {} 
     @Override
     public String toString() {
-        return "Users [age=" + age + ", description=" + description + ", firstName=" + firstName + ", id=" + id
-                + ", lastName=" + lastName + "]";
+        return "Trainer [active=" + active + ", createdAt=" + createdAt + ", description=" + description
+                + ", experience=" + experience + ", firstName=" + firstName + ", id=" + id + ", lastName=" + lastName
+                + ", updatedAt=" + updatedAt + "]";
     }
-
     // hashcode {} 
-
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((age == null) ? 0 : age.hashCode());
+        result = prime * result + (active ? 1231 : 1237);
+        result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
         result = prime * result + ((description == null) ? 0 : description.hashCode());
+        result = prime * result + ((experience == null) ? 0 : experience.hashCode());
         result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+        result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
         return result;
     }
 
@@ -67,16 +72,23 @@ public class Users {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Users other = (Users) obj;
-        if (age == null) {
-            if (other.age != null)
+        Trainer other = (Trainer) obj;
+        if (active != other.active)
+            return false;
+        if (createdAt == null) {
+            if (other.createdAt != null)
                 return false;
-        } else if (!age.equals(other.age))
+        } else if (!createdAt.equals(other.createdAt))
             return false;
         if (description == null) {
             if (other.description != null)
                 return false;
         } else if (!description.equals(other.description))
+            return false;
+        if (experience == null) {
+            if (other.experience != null)
+                return false;
+        } else if (!experience.equals(other.experience))
             return false;
         if (firstName == null) {
             if (other.firstName != null)
@@ -93,12 +105,12 @@ public class Users {
                 return false;
         } else if (!lastName.equals(other.lastName))
             return false;
+        if (updatedAt == null) {
+            if (other.updatedAt != null)
+                return false;
+        } else if (!updatedAt.equals(other.updatedAt))
+            return false;
         return true;
     }
 
-
-    
-
-    
-    
 }

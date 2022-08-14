@@ -36,7 +36,7 @@
         <select class="form-control " id="role" required th:field="*{role}">
             <option hidden value="">Select a role</option>
             <option
-                    th:each="role : ${T(com.spring.springuser.model.Role).values()}"
+                    th:each="role : ${T(com.eventtracker.events.model.Role).values()}"
                     th:text="${role}"
                     th:value="${role}">
             </option>

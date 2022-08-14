@@ -37,7 +37,7 @@
         <select class="form-control " id="role" required th:field="*{experience}">
             <option hidden value="">Select a Level</option>
             <option
-                    th:each="experience : ${T(com.spring.springuser.model.ExperienceLevel).values()}"
+                    th:each="experience : ${T(com.eventtracker.events.model.ExperienceLevel).values()}"
                     th:text="${experience}"
                     th:value="${experience}">
             </option>

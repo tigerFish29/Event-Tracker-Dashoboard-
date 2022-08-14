@@ -38,13 +38,13 @@ public class EmployeeController {
         List<Employee> employees = service.getAllEmployees();
         model.addAttribute("employees", employees);
         model.addAttribute("employee", new Employee());
-        return null;
+        return "employees";
      }
 
      @PostMapping("/create-emp")
      public String createEmployee(RedirectAttributes redirects, @ModelAttribute Employee employee) {
         service.createEmployer(employee);
-        return null; 
+        return "home"; 
      }
 
     @GetMapping("/emp/{id}")

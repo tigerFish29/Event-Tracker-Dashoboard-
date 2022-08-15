@@ -1,6 +1,5 @@
 package com.eventtracker.events.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
@@ -54,7 +53,7 @@ public class UserService {
         fromDB.setDescription(request.getDescription());
         fromDB.setRole(request.getRole());
         fromDB.setActive(request.isActive());
-        fromDB.setUpdatedAt(LocalDateTime.now());
+      
         return userRepository.save(fromDB);
     }
 

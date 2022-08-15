@@ -60,16 +60,16 @@ public class EmployeeController {
      public String updateEmployee(@PathVariable("id") Integer id, @Valid Employee employee, BindingResult result, Model model) {
         if(result.hasErrors()) {
             employee.setId(id);
-            return null;
+            return "edit-emp";
         }
-        return null;
+        return "employees";
      }
 
      @GetMapping("/emp-del/{id}")
      public String deleteEmployee(@PathVariable("id") Integer id, Model model) {
         Employee employee = service.getEmployee(id);
         repo.delete(employee);
-        return null;
+        return "home";
      }
 
     

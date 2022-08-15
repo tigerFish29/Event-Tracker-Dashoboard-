@@ -1,6 +1,6 @@
 package com.eventtracker.events.model;
 
-import java.time.LocalDateTime;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,6 +22,7 @@ public class UserInfo {
     @Column(nullable = false)
     private Integer id;
 
+    
     @Column(nullable = false)
     private String firstName;
 
@@ -31,38 +32,32 @@ public class UserInfo {
     @Column(nullable = false)
     private String description;
 
+    
+
+
     private String role;
     
     private boolean active= true;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
-    private LocalDateTime updatedAt = LocalDateTime.now();
-
     
     @Override
     public String toString() {
-        return "UserInfo [active=" + active + ", createdAt=" + createdAt + ", description=" + description
-                + ", firstName=" + firstName + ", id=" + id + ", lastName=" + lastName + ", role=" + role
-                + ", updatedAt=" + updatedAt + "]";
+        return "UserInfo [active=" + active + ", description=" + description + ", firstName=" + firstName + ", id=" + id
+                + ", lastName=" + lastName + ", role=" + role + "]";
     }
-
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + (active ? 1231 : 1237);
-        result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
         result = prime * result + ((description == null) ? 0 : description.hashCode());
         result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
         result = prime * result + ((role == null) ? 0 : role.hashCode());
-        result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
         return result;
     }
-    
-    // hashcode {} 
 
     @Override
     public boolean equals(Object obj) {
@@ -74,11 +69,6 @@ public class UserInfo {
             return false;
         UserInfo other = (UserInfo) obj;
         if (active != other.active)
-            return false;
-        if (createdAt == null) {
-            if (other.createdAt != null)
-                return false;
-        } else if (!createdAt.equals(other.createdAt))
             return false;
         if (description == null) {
             if (other.description != null)
@@ -105,12 +95,14 @@ public class UserInfo {
                 return false;
         } else if (!role.equals(other.role))
             return false;
-        if (updatedAt == null) {
-            if (other.updatedAt != null)
-                return false;
-        } else if (!updatedAt.equals(other.updatedAt))
-            return false;
         return true;
     }
+
+    
+
+    
+
+    
+    
 
 }

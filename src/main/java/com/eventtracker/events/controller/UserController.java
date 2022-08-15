@@ -39,6 +39,8 @@ public class UserController {
        return "users";
     }
 
+    
+
     // crud path for one user {} 
     @GetMapping("/{id}")
     public String getUser(Model model, @PathVariable("id") Integer id) {

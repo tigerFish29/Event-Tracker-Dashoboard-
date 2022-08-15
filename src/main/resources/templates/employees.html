@@ -71,7 +71,8 @@
         <td class="align-middle" th:text="${employee.email}"></td>
         <td class="align-middle" th:text="${employee.createdAt}"></td>
         <td class="align-middle" th:text="${employee.updatedAt}"></td>
-        
+        <td class="align-middle text-center"><a class="btn btn-secondary" th:href=@{/emp/{id}(id=${employee.id})}>✏</a></td>
+        <td class="align-middle text-center"><a class="btn btn-danger"th:href="@{/emp-del/{id}(id=${employee.id})}">Delete</a></td>
     </tr>
 </table>
 </body>

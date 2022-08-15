@@ -11,7 +11,7 @@
           rel="stylesheet">
 </head>
 <body class="container">
-<form class="col card p-3 my-5" method="post" th:action=@{/emp/{id}(id=${employee.id})} th:object="${userInfo}">
+<form class="col card p-3 my-5" method="post" th:action=@{/emp-update/{id}(id=${employee.id})} th:object="${employee}">
     <div class="form-group">
         <label for="firstName">First Name</label>
         <input class="form-control" id="firstName" placeholder="Enter First Name" required
@@ -25,7 +25,19 @@
                type="text"/>
     </div>
 
-    
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input class="form-control" id="email" placeholder="Enter email address" required  autocomplete="off"
+               th:field="*{email}"
+               type="text"/>
+    </div>
+
+    <div class="form-group">
+        <label for="employeeNumber">Email</label>
+        <input class="form-control" id="employeeNumber" placeholder="Enter employee number" required  autocomplete="off"
+               th:field="*{employeeNumber}"
+               type="text"/>
+    </div>
     
 
     <input id="activeFlag" type="hidden" th:field="*{active}">

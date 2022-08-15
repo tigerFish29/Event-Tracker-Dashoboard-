@@ -51,7 +51,7 @@ public class EmployeeController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
        Employee employee = service.getEmployee(id);
        model.addAttribute("employee", employee);
-       return null;
+       return "edit-emp";
     }
 
 

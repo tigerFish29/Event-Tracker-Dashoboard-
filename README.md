@@ -1,6 +1,6 @@
 ### Welcome to Event Tracker Dashboard 
 
-
+[Jira](https://paul-chabz.atlassian.net/jira/software/projects/SB/boards/1)
 ----
 
 A simple web application dashboard that allows users to perform simple crud operations on events on three entities. 

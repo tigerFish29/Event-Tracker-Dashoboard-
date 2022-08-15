@@ -30,7 +30,7 @@ populate your tables and you can perform simple crud functions.
 #### Starting up the application 
 Navigating to the Localhost configures within the resources should bring up the first page to create users 
 
-image.png
+![Screenshot](addForm.png)
 
 
 ----

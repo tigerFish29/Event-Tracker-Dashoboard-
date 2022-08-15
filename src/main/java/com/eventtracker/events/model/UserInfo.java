@@ -97,12 +97,6 @@ public class UserInfo {
             return false;
         return true;
     }
-
-    
-
-    
-
-    
-    
+  
 
 }

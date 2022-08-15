@@ -11,7 +11,7 @@
           rel="stylesheet">
 </head>
 <body class="container">
-<form class="col card p-3 my-5" method="post" th:action="@{/}" th:object="${userInfo}">
+<form class="col card p-3 my-5" method="post" th:action="@{/create-emp}" th:object="${employee}">
     <div class="form-group">
         <label for="firstName">First Name</label>
         <input class="form-control" id="firstName" placeholder="Enter First Name" required autocomplete="off"
@@ -26,24 +26,24 @@
     </div>
 
     <div class="form-group">
-        <label for="lastName">Description</label>
-        <textarea class="form-control" id="description"  rows="7" autocomplete="off"
-               th:field="*{description}"
-               type="text"></textarea>
+        <label for="email">Email</label>
+        <input class="form-control" id="email" placeholder="Enter email address" required  autocomplete="off"
+               th:field="*{email}"
+               type="text"/>
     </div>
+
     <div class="form-group">
-        <label for="role">Role</label>
-        <select class="form-control " id="role" required th:field="*{role}">
-            <option hidden value="">Select a role</option>
-            <option
-                    th:each="role : ${T(com.eventtracker.events.model.Role).values()}"
-                    th:text="${role}"
-                    th:value="${role}">
-            </option>
-        </select>
+        <label for="employeeNumber">Email</label>
+        <input class="form-control" id="employeeNumber" placeholder="Enter employee number" required  autocomplete="off"
+               th:field="*{employeeNumber}"
+               type="text"/>
     </div>
+
+    
+    </div>
+    
     <div>
-        <input class="btn btn-primary" type="submit" value="Create User">
+        <input class="btn btn-primary" type="submit" value="Create Employee">
         <input class="btn btn-dark" type="reset" value="Reset">
     </div>
 </form>
@@ -55,22 +55,23 @@
         <th>ID</th>
         <th>First Name</th>
         <th>Last Name</th>
-        <th>ExperienceLevel</th>
+        <th>Email</th>
+        <th>Employee Number</th>
         <th>Created At</th>
         <th>Updated At</th>
         <th>Actions</th>
     </tr>
-    <tr th:if="${#lists.isEmpty(users)}">
+    <tr th:if="${#lists.isEmpty(employees)}">
         <td class="text-center" colspan="7">No Records found. Add some...!</td>
     </tr>
-    <tr th:each="user : ${users}">
-        <td class="align-middle" th:text="${user.id}"></td>
-        <td class="align-middle" th:text="${user.firstName}"></td>
-        <td class="align-middle" th:text="${user.lastName}"></td>
-        <td class="align-middle" th:text="${user.role}"></td>
-        <td class="align-middle" th:text="${user.createdAt}"></td>
-        <td class="align-middle" th:text="${user.updatedAt}"></td>
-        <td class="align-middle text-center"><a class="btn btn-secondary" th:href="'/' + ${user.id}">✏</a></td>
+    <tr th:each="employee : ${employees}">
+        <td class="align-middle" th:text="${employee.id}"></td>
+        <td class="align-middle" th:text="${employee.firstName}"></td>
+        <td class="align-middle" th:text="${employee.lastName}"></td>
+        <td class="align-middle" th:text="${employee.email}"></td>
+        <td class="align-middle" th:text="${employee.createdAt}"></td>
+        <td class="align-middle" th:text="${employee.updatedAt}"></td>
+        
     </tr>
 </table>
 </body>

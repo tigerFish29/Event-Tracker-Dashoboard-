@@ -34,6 +34,8 @@ public class Employee {
     @Column(nullable = false)
     private Long employeeNumber;
 
+    private boolean active= true;
+
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 
